@@ -21,8 +21,6 @@ And it will launch the following components
 * adminer UI - listening on [localhost:8080](http://localhost:8080)
 * Web app - listening on [localhost:8000](http://localhost:8000)
 
-![](images/db1.png)
-
 ## Test-1: Check DB Connection
 
 Log into adminer UI running on [localhost:8080](http://localhost:8080)
@@ -33,6 +31,8 @@ Log into adminer UI running on [localhost:8080](http://localhost:8080)
 Once you login you will see `happydb`.
 
 If this works, postgres and adminer are working together.
+
+![](images/db1.png)
 
 ## Test-2: Check Web app
 
