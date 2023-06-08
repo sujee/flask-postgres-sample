@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    ports:
+      # don't expose to whole world!
+      #- '5432:5432'
+      - "127.0.0.1:5432:5432"
+    
+    # so other containers on the same network can find this
+    expose:
+      - 5432
+
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - mandalore-net
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    depends_on: 
+      - postgres
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - mandalore-net
+
+  webapp:
+    build:
+        context: ./web-app
+        dockerfile: Dockerfile
+    container_name: webapp
+    restart: always
+    ports:
+      - "8000:5000"
+    volumes:
+      - ./web-app:/app
+    env_file:
+      - .env
+    depends_on: 
+      - postgres
+    networks:
+      - mandalore-net
+
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  mandalore-net:
+    driver: bridge
+    name: mandalore-net
