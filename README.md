@@ -7,9 +7,10 @@
 
 ## Bring up
 
-Run 
-
 ```bash
+$   git clone https://github.com/sujee/flask-postgres-sample
+$   cd flask-postgres-sample
+
 $   docker compose up -d
 ```
 
